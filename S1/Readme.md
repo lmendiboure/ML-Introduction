@@ -196,12 +196,9 @@ print("Accuracy k-NN sans scaler:", knn_no_scaler.score(X_test, y_test))
 ## Étape 10 — Limites de l’accuracy et ouverture
 **Q27.** Quelle est la limite de l’accuracy comme seule métrique (pensez aux classes déséquilibrées ou au coût des erreurs) ?  
 
-*(Optionnel)* Testez `DecisionTreeClassifier`. Observez train vs test.  
-**Q28.** Décrivez ce qu’est le **sur-ajustement** et comment le détecteriez-vous mieux.  
-
 ---
 
 ## À rendre
 - Votre notebook avec code complété.  
-- Réponses aux questions Q1–Q27 (+ Q28 si fait).  
+- Réponses aux questions Q1–Q27.  
 - Figures (matrices, courbe k vs accuracy).  
