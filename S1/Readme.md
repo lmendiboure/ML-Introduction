@@ -1,19 +1,19 @@
-# TP – Séance 1 (version active & guidée)  
+# TP – Séance 1 
+
 ## Premiers pas en apprentissage supervisé avec scikit-learn
 
-### 🎯 Objectifs
+### Objectifs
 - Explorer un **vrai dataset** (Breast Cancer) et comprendre sa structure (lignes, colonnes, classes).  
-- Découvrir un algorithme simple : **k plus proches voisins (k-NN)**.  
-- Évaluer un modèle : **accuracy** et **matrice de confusion**.  
-- Comparer avec la **régression logistique**.  
-- Tester et **justifier** des choix de paramètres (valeurs de *k*, normalisation, etc.).  
+- Identifier le **type de tâche** et le **type d’apprentissage** correspondant.  
+- Découvrir deux algorithmes supervisés : **k plus proches voisins (k-NN)** et **régression logistique**.  
+- Évaluer un modèle avec l’**accuracy** et la **matrice de confusion**.  
+- Tester et justifier des choix de paramètres (valeurs de *k*, normalisation, hyperparamètres).  
 
-⏳ Durée cible : **~2h**  
-🛠️ Plateforme : **Google Colab** (ou local avec Python 3 + scikit-learn).  
+🛠️ Plateforme : **Google Colab** ou Python 3 + scikit-learn.  
 
 ---
 
-## 🧭 Repères utiles (où chercher l’info ?)
+## Repères utiles (où chercher l’info)
 - Guide de démarrage : https://scikit-learn.org/stable/getting_started.html  
 - `KNeighborsClassifier` : https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html  
 - `LogisticRegression` : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html  
@@ -22,13 +22,11 @@
 - `train_test_split` : https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html  
 - `ConfusionMatrixDisplay` : https://scikit-learn.org/stable/modules/generated/sklearn.metrics.ConfusionMatrixDisplay.html  
 
-Astuce Colab : vous pouvez afficher l’aide courte d’une classe avec `KNeighborsClassifier?` (ou `help(KNeighborsClassifier)`).
+Astuce Colab : affichez l’aide courte d’une classe avec `KNeighborsClassifier?`.
 
 ---
 
 ## Étape 0 — Préparer l’environnement
-Créez un nouveau notebook et exécutez :
-
 ```python
 import numpy as np, pandas as pd
 from sklearn.datasets import load_breast_cancer
@@ -41,31 +39,30 @@ from sklearn.metrics import accuracy_score, ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
 ```
 
-**Q1.** À quoi servent `Pipeline` et `StandardScaler` dans un flux de travail ML ?  
-👉 Indice : lisez les courts résumés des docs liées ci-dessus.
+**Q1.** À quoi sert `Pipeline` dans un flux de travail ML ?  
+**Q2.** À quoi sert `StandardScaler` ?  
+**Q3.** Pourquoi a-t-on besoin à la fois de modules pour les données (`train_test_split`, `StandardScaler`) et pour les modèles (`KNeighborsClassifier`, `LogisticRegression`) ?  
 
 ---
 
-## Étape 1 — Explorer rapidement le dataset
+## Étape 1 — Explorer le dataset
 ```python
 data = load_breast_cancer()
 X, y = data.data, data.target
-feature_names = data.feature_names
-target_names = data.target_names
+feature_names, target_names = data.feature_names, data.target_names
 
-print("X shape:", X.shape)             # (n_samples, n_features)
+print("X shape:", X.shape)
 print("y shape:", y.shape)
 print("Features (10 premières):", feature_names[:10])
 print("Classes:", target_names)
 
-# Afficher 5 premières lignes sous forme de DataFrame pour mieux lire
 pd.DataFrame(X, columns=feature_names).head()
 ```
 
-**Q2.** Combien y a-t-il d’exemples et de variables ?  
-**Q3.** Que représente **une ligne** de `X` dans la réalité (pas “une ligne de tableau” 😉) ?  
-**Q4.** Que signifient les classes `target_names` (qui est 0 ? qui est 1) ?  
-👉 Indice : ce dataset est médical (tumeur bénigne/maligne).
+**Q4.** Combien y a-t-il d’exemples (lignes) et de variables (colonnes) ?  
+**Q5.** Que représente une **ligne** dans `X` ?  
+**Q6.** Que signifient les classes `target_names` ? Qui est 0, qui est 1 ?  
+**Q7.** Est-ce un problème de **classification** ou de **régression** ? Justifiez votre réponse.  
 
 ---
 
@@ -77,98 +74,86 @@ X_train, X_test, y_train, y_test = train_test_split(
 print(X_train.shape, X_test.shape)
 ```
 
-**Q5.** Quelle proportion est réservée au test ? Pourquoi ne pas tout utiliser pour l’entraînement **et** le test ?  
-**Q6.** À quoi sert `stratify=y` ici ? (Astuce : garder la même proportion de classes.)
+**Q8.** Quelle proportion est réservée au test ?  
+**Q9.** Pourquoi ne pas tout utiliser pour l’apprentissage **et** le test ?  
+**Q10.** À quoi sert `stratify=y` ?  
 
 ---
 
 ## Étape 3 — Construire un premier modèle k-NN (avec normalisation)
-Complétez le pipeline (lisez la doc `Pipeline` et `KNeighborsClassifier`) :
+Complétez :
 
 ```python
-# TODO: complétez les '...'
 knn = Pipeline(steps=[
-    ('scaler', StandardScaler()),          # étape de mise à l'échelle
-    ('clf', KNeighborsClassifier(n_neighbors=...))  # choisir k (entier > 0)
+    ('scaler', StandardScaler()),          
+    ('clf', KNeighborsClassifier(n_neighbors=...))  # choisir k
 ])
 
-knn.fit(X_train, y_train)                  # apprentissage
-y_pred_knn = knn.predict(X_test)           # prédictions
-acc_knn = knn.score(X_test, y_test)        # accuracy
+knn.fit(X_train, y_train)
+y_pred_knn = knn.predict(X_test)
+acc_knn = knn.score(X_test, y_test)
 print(f"Accuracy k-NN (k=?): {acc_knn:.3f}")
 ```
 
-**Q7.** Pourquoi **standardiser** les features avant k-NN ? (Il y a une histoire de **distance**…)  
-**Q8.** Expliquez avec vos mots ce que font `fit()` et `predict()`.
+**Q11.** Pourquoi standardiser les features avant k-NN ?  
+**Q12.** Expliquez avec vos mots ce que font `fit()` et `predict()`.  
+**Q13.** D’après le nom “k plus proches voisins”, comment le modèle prend-il une décision ?  
 
 ---
 
-## Étape 4 — Lire une matrice de confusion (sur vos vrais résultats)
+## Étape 4 — Lire une matrice de confusion
 ```python
 ConfusionMatrixDisplay.from_predictions(y_test, y_pred_knn)
 plt.show()
 ```
 
-**Q9.** Sans chercher sur Internet : d’après vos sorties, que représentent les 4 cases (nommez-les) ?  
-**Q10.** Quelle information apporte la matrice de confusion que l’accuracy ne montre pas ?
-
-👉 Besoin d’un indice ? Voyez la doc `ConfusionMatrixDisplay` pour les libellés.
+**Q14.** Que représentent les 4 cases de la matrice ? (Essayez de les nommer sans aide.)  
+**Q15.** Pourquoi la matrice de confusion donne plus d’informations que l’accuracy seule ?  
 
 ---
 
-## Étape 5 — Choisir *k* de manière raisonnée (actif mais guidé)
-Plutôt que de vous donner les valeurs, **proposez une liste de k impairs** allant de 1 à une borne raisonnable.  
-*Règle pratique fréquente* : tester jusqu’à **≈ √(n_train)** (arrondi au supérieur), en ne prenant que des **impairs** (pour éviter les ex æquo en vote majoritaire).
-
+## Étape 5 — Choisir k de manière raisonnée
 ```python
 n_train = len(X_train)
-k_max = int(np.ceil(np.sqrt(n_train)))    # borne haute recommandée
+k_max = int(np.ceil(np.sqrt(n_train)))
 print("Taille train:", n_train, "→ k_max recommandé ≈", k_max)
 
-# TODO : construisez une liste de k impairs entre 1 et k_max (inclus si impair)
-# Par ex. [1, 3, 5, ...]
+# TODO : générez une liste de valeurs impaires entre 1 et k_max inclus
 k_values = [ ... ]
-
-print(k_values[:10], "...")
 ```
 
-**Q11.** Quelle méthode avez-vous utilisée pour générer des valeurs **impaires** ? (boucle, slicing, `range` pas de 2, etc.)
+**Q16.** Quelle méthode utilisez-vous pour obtenir uniquement des valeurs **impaires** ?  
+**Q17.** Pourquoi tester plusieurs k est-il nécessaire ?  
 
 ---
 
-## Étape 6 — Évaluer plusieurs k (boucle à compléter)
-Complétez la boucle :
+## Étape 6 — Évaluer plusieurs k
+Complétez :
 
 ```python
 results = []
 for k in k_values:
     model = Pipeline(steps=[
         ('scaler', StandardScaler()),
-        ('clf', KNeighborsClassifier(n_neighbors=...))   # TODO: utilisez k
+        ('clf', KNeighborsClassifier(n_neighbors=k))
     ])
     model.fit(X_train, y_train)
     acc = model.score(X_test, y_test)
     results.append((k, acc))
 
-# Affichage des 10 premiers résultats pour contrôle
 print(results[:10])
 ```
 
-**Q12.** Quel est le **meilleur k** trouvé ? Quelle **accuracy** obtenez-vous ?  
-Astuce Python : `best = max(results, key=lambda t: t[1])`
-
-Optionnel (très conseillé) : tracer la courbe **k vs accuracy** avec `matplotlib` (une seule figure, pas de style spécifique demandé).
+**Q18.** Quel est le **meilleur k** trouvé ? Quelle est son accuracy ?  
+**Q19.** En comparant petits et grands k, que remarquez-vous (sensibilité au bruit vs généralisation) ?  
 
 ---
 
 ## Étape 7 — Comparer avec la régression logistique
-Complétez puis évaluez :
-
 ```python
-# TODO: pipeline StandardScaler + LogisticRegression
 log_reg = Pipeline(steps=[
     ('scaler', StandardScaler()),
-    ('clf', LogisticRegression(max_iter=500))   # vous pouvez ajuster max_iter si warning
+    ('clf', LogisticRegression(max_iter=500))
 ])
 log_reg.fit(X_train, y_train)
 y_pred_log = log_reg.predict(X_test)
@@ -179,49 +164,44 @@ ConfusionMatrixDisplay.from_predictions(y_test, y_pred_log)
 plt.show()
 ```
 
-**Q13.** Lequel est meilleur sur ce dataset : votre **meilleur k-NN** ou la **logistique** ?  
-**Q14.** En regardant les deux matrices de confusion, quels **types d’erreurs** diffèrent ? (FP vs FN par ex.)
-
-👉 Pour comprendre `LogisticRegression` : voyez la doc et le paramètre `C` (régularisation).
+**Q20.** Quelle est l’accuracy de la régression logistique ?  
+**Q21.** Lequel est meilleur : votre meilleur k-NN ou la logistique ?  
+**Q22.** Selon vous, la régression logistique renvoie-t-elle une probabilité ou directement une classe ? Justifiez.  
 
 ---
 
-## Étape 8 — Effet de la normalisation (vérification indispensable)
-**Test de contrôle** : que se passe-t-il si vous **retirez le `StandardScaler`** pour k-NN ?  
-(code quasi identique, mais sans l’étape `scaler`)
-
+## Étape 8 — Effet de la normalisation
 ```python
 knn_no_scaler = Pipeline(steps=[
-    # ('scaler', StandardScaler()),   # (désactivé volontairement)
     ('clf', KNeighborsClassifier(n_neighbors=...))  # reprenez votre meilleur k
 ])
 knn_no_scaler.fit(X_train, y_train)
 print("Accuracy k-NN sans scaler:", knn_no_scaler.score(X_test, y_test))
 ```
 
-**Q15.** Que concluez-vous sur l’importance de la **mise à l’échelle** pour k-NN ?  
-👉 Si la différence est faible chez vous : essayez d’autres *k* et observez la matrice de confusion.
+**Q23.** Quelle différence observez-vous en retirant la normalisation ?  
+**Q24.** Que concluez-vous sur l’importance du `StandardScaler` ?  
 
 ---
 
-## Étape 9 — Mini-défi 🎯 (> 0.95 d’accuracy)
-- Visez **> 0.95** d’accuracy : ajustez *k* ou des paramètres de la logistique (`C`, `penalty`).  
-- Justifiez en **1–2 phrases** votre choix final.
+## Étape 9 — Mini-défi (> 0.95 d’accuracy)
+- Ajustez *k* ou les paramètres de la logistique (`C`, `penalty`).  
+- Visez > 0.95 d’accuracy.  
 
-**Q16.** Quel est votre **meilleur modèle** ? Paramètres et accuracy obtenue ?  
-**Q17.** Quelle **limite** voyez-vous à n’utiliser que l’accuracy ? (indice : classes déséquilibrées, coût des erreurs…)
-
----
-
-## Étape 10 — (Optionnel) Aller un peu plus loin
-- Essayez `DecisionTreeClassifier` (doc : `sklearn.tree.DecisionTreeClassifier`).  
-- Comparez rapidement l’accuracy et la matrice de confusion.
-
-**Q18.** Observez-vous un **sur-ajustement** (accuracy train >> test) ? Comment le détecteriez-vous proprement à l’avenir ?
-👉 Teaser S2 : **validation croisée** et **biais/variance**.
+**Q25.** Quel est votre meilleur modèle ? Donnez ses paramètres et son accuracy.  
+**Q26.** Comment appelle-t-on le processus consistant à ajuster de tels paramètres ? (Indice : slides “hyperparamètres”.)  
 
 ---
 
-## ✅ À rendre
-- Notebook propre **avec votre code complété**, vos **réponses Q1–Q18**, et vos figures (matrices de confusion, éventuelle courbe k vs accuracy).  
-- Quelques phrases d’interprétation pour **justifier** vos choix.
+## Étape 10 — Limites de l’accuracy et ouverture
+**Q27.** Quelle est la limite de l’accuracy comme seule métrique (pensez aux classes déséquilibrées ou au coût des erreurs) ?  
+
+*(Optionnel)* Testez `DecisionTreeClassifier`. Observez train vs test.  
+**Q28.** Décrivez ce qu’est le **sur-ajustement** et comment le détecteriez-vous mieux.  
+
+---
+
+## À rendre
+- Votre notebook avec code complété.  
+- Réponses aux questions Q1–Q27 (+ Q28 si fait).  
+- Figures (matrices, courbe k vs accuracy).  
