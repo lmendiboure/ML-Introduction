@@ -107,7 +107,7 @@ ConfusionMatrixDisplay.from_predictions(y_test, y_pred_knn)
 plt.show()
 ```
 
-**Q14.** Que représentent les 4 cases de la matrice ? (Essayez de les nommer sans aide.)  
+**Q14.** Que représentent les 4 cases de la matrice ? 
 **Q15.** Pourquoi la matrice de confusion donne plus d’informations que l’accuracy seule ?  
 
 ---
@@ -189,7 +189,7 @@ print("Accuracy k-NN sans scaler:", knn_no_scaler.score(X_test, y_test))
 - Visez > 0.95 d’accuracy.  
 
 **Q25.** Quel est votre meilleur modèle ? Donnez ses paramètres et son accuracy.  
-**Q26.** Comment appelle-t-on le processus consistant à ajuster de tels paramètres ? (Indice : slides “hyperparamètres”.)  
+**Q26.** Comment appelle-t-on le processus consistant à ajuster de tels paramètres ?
 
 ---
 
