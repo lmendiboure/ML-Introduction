@@ -184,9 +184,9 @@ print("Accuracy k-NN sans scaler:", knn_no_scaler.score(X_test, y_test))
 
 ---
 
-## Étape 9 — Mini-défi (> 0.95 d’accuracy)
+## Étape 9 — Mini-défi (Maximiser l'accuracy)
 - Ajustez *k* ou les paramètres de la logistique (`C`, `penalty`).  
-- Visez > 0.95 d’accuracy.  
+- Visez le maximum d’accuracy.  
 
 **Q25.** Quel est votre meilleur modèle ? Donnez ses paramètres et son accuracy.  
 **Q26.** Comment appelle-t-on le processus consistant à ajuster de tels paramètres ?
