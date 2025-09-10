@@ -201,4 +201,53 @@ print("Accuracy k-NN sans scaler:", knn_no_scaler.score(X_test, y_test))
 ## À rendre
 - Votre notebook avec code complété.  
 - Réponses aux questions Q1–Q27.  
-- Figures (matrices, courbe k vs accuracy).  
+- Figures (matrices, courbe k vs accuracy).
+
+## Bonus 1 — Courbes d’apprentissage
+
+Nous voulons voir comment l’accuracy évolue quand on augmente la taille du jeu d’entraînement.
+
+```python
+from sklearn.model_selection import learning_curve
+
+train_sizes, train_scores, test_scores = learning_curve(
+    LogisticRegression(max_iter=500),
+    X, y, cv=5, train_sizes=np.linspace(0.1, 1.0, 5)
+)
+
+import matplotlib.pyplot as plt
+plt.plot(train_sizes, train_scores.mean(axis=1), label="train")
+plt.plot(train_sizes, test_scores.mean(axis=1), label="test")
+plt.legend()
+plt.show()
+```
+
+**QB1**. Que remarquez-vous lorsque la taille du jeu de train augmente ?
+**QB2.** Comment interpréter un écart entre courbe train et test ? (indice : underfit vs overfit).
+
+## Bonus 2 — Autres métriques que l’accuracy
+
+```python
+from sklearn.metrics import classification_report
+print(classification_report(y_test, y_pred_knn))
+```
+
+**QB3.** Que signifient précision (precision), rappel (recall) et F1-score ?
+**QB4.** Pourquoi l’accuracy seule peut être trompeuse si les classes sont très déséquilibrées ?
+
+## Bonus 3 — Visualiser la frontière de décision (2 features)
+
+Réduisons le dataset à 2 variables pour mieux visualiser.
+
+```python
+X2 = X[:, :2]   # prenons les 2 premières features
+X2_train, X2_test, y2_train, y2_test = train_test_split(X2, y, test_size=0.3, random_state=42)
+
+knn2 = KNeighborsClassifier(n_neighbors=5)
+knn2.fit(X2_train, y2_train)
+
+# Code de visualisation à compléter (scatter + contourf)
+```
+
+**QB5.** Dessinez la frontière de décision pour k-NN avec 2 features.
+**QB6.** Faites de même pour la logistique. Quelle différence visuelle observez-vous entre les deux modèles ?
