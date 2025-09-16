@@ -48,7 +48,7 @@ plt.show()
 ```
 
 **Q3.** Quelle est la taille de ce dataset ?  
-**Q4.** Que se passerait-il si on mettait `noise=0` ? Et si on augmentait fortement `noise` ?  
+**Q4.** Que se passerait-il si on mettait `noise=0` ? Et si on augmentait fortement `noise` ? (exemple : tester 0 et 0.5 et comparer) 
 *(Indice : essayez et observez la figure)*  
 
 ---
