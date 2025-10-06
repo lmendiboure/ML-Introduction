@@ -1,6 +1,6 @@
-#TP3 – Découverte des réseaux de neurones avec le MLPClassifier
+# TP3 – Découverte des réseaux de neurones avec le MLPClassifier
 
-##Objectifs
+## Objectifs
 - Comprendre le fonctionnement d’un réseau de neurones multicouche (**MLP**).
 - Manipuler les principaux **hyperparamètres** : nombre de neurones, couches, fonctions d’activation, itérations.
 - Observer les effets d’**underfitting**, d’**overfitting** et de **mauvaise convergence**.
@@ -15,7 +15,7 @@ Plateforme recommandée : **Google Colab** (Python 3 + scikit-learn)
 ## Étape 0 — Préparation et exploration des données
 Nous allons travailler sur le dataset **Digits** de Scikit-learn..
 
-📚 **Aide** : documentation officielle de `load_digits`  
+**Aide** : documentation officielle de `load_digits`  
 https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_digits.html
 
 ```python
@@ -44,7 +44,7 @@ plt.show()
 
 ## Étape 1 — Créer et entraîner un premier réseau simple
 
-📚 **Aide** : documentation `MLPClassifier`  
+**Aide** : documentation `MLPClassifier`  
 https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html
 
 Nous allons créer un réseau de neurones **avec une seule couche cachée** contenant 30 neurones.
@@ -85,7 +85,7 @@ Nous allons tester plusieurs architectures :
 - Une seule couche cachée avec 20, 50 et 100 neurones.  
 - Puis un réseau **à deux couches** avec 50 et 20 neurones.
 
-💡 **Indice** : regardez le paramètre `hidden_layer_sizes` dans la doc de `MLPClassifier`.
+**Indice** : regardez le paramètre `hidden_layer_sizes` dans la doc de `MLPClassifier`.
 
 ```python
 hidden_layers = [(20,), (50,), (100,), (50,20)]
@@ -112,7 +112,7 @@ for hl in hidden_layers:
 
 Nous allons comparer trois fonctions d’activation : `relu`, `tanh` et `logistic`.
 
-📚 **Aide** : paramètres `activation` dans la doc de `MLPClassifier`.
+**Aide** : paramètres `activation` dans la doc de `MLPClassifier`.
 
 ```python
 activations = ['relu', 'tanh', 'logistic']
@@ -135,7 +135,7 @@ for act in activations:
 Le paramètre `max_iter` contrôle le nombre d’itérations de l’algorithme d’optimisation (descente de gradient).  
 Un message d’avertissement “**Maximum iterations reached**” indique que le modèle n’a pas complètement convergé.
 
-📚 **Aide** : consultez `mlp.loss_curve_` pour tracer la courbe d’évolution de l’erreur.
+**Aide** : consultez `mlp.loss_curve_` pour tracer la courbe d’évolution de l’erreur.
 
 ```python
 mlp_iter = MLPClassifier(hidden_layer_sizes=(50,20), activation='relu', max_iter=30, random_state=42)
@@ -169,13 +169,14 @@ plt.show()
 
 ---
 
-## 🚀 Pour aller plus loin (optionnel)
+## Pour aller plus loin
 
-1. **Tester un réseau plus profond** : ajoutez une troisième couche cachée, par exemple `(100, 50, 20)`.  
-   Observez les effets sur la précision et le temps d’entraînement.  
-2. **Comparer avec un modèle plus simple** : entraînez une régression logistique sur le même dataset (`LogisticRegression`).  
+1. **QB1. Tester un réseau plus profond** : ajoutez une troisième couche cachée, par exemple `(100, 50, 20)`.  
+   Observez les effets sur la précision et le temps d’entraînement.
+     
+3. **QB2. Comparer avec un modèle plus simple** : entraînez une régression logistique sur le même dataset (`LogisticRegression`).  
    Comparez les performances avec celles du MLP.  
-3. **Visualiser les erreurs** : affichez quelques chiffres mal classés pour comprendre les confusions du modèle.
+4. **QB3. Visualiser les erreurs** : affichez quelques chiffres mal classés pour comprendre les confusions du modèle.
 
 ```python
 import numpy as np
@@ -186,5 +187,3 @@ for idx in misclassified:
     plt.title(f"Vrai: {...[idx]} / Prédit: {...[idx]}")
     plt.show()
 ```
-
-> 💬 Ces explorations vous permettront de mieux comprendre la capacité des réseaux de neurones à apprendre des représentations non linéaires, mais aussi leurs limites quand la complexité est trop élevée ou mal réglée.
