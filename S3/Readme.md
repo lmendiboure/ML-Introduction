@@ -38,7 +38,7 @@ plt.show()
 
 **Q2.** Pourquoi les images doivent-elles être **aplaties** (converties en 64 colonnes) avant d’être utilisées par un MLP ?  
 
-**Q3.** Combien de classes différentes contient ce jeu de données ?
+**Q3.** Combien de classes différentes contient ce jeu de données ? Quelles sont elles ?
 
 ---
 
