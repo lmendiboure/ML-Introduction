@@ -1,6 +1,6 @@
-# TP3 – Découverte des réseaux de neurones avec le MLPClassifier
+#TP3 – Découverte des réseaux de neurones avec le MLPClassifier
 
-## 🎯 Objectifs
+##Objectifs
 - Comprendre le fonctionnement d’un réseau de neurones multicouche (**MLP**).
 - Manipuler les principaux **hyperparamètres** : nombre de neurones, couches, fonctions d’activation, itérations.
 - Observer les effets d’**underfitting**, d’**overfitting** et de **mauvaise convergence**.
