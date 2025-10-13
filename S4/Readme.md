@@ -6,8 +6,7 @@
 - Visualiser les filtres et cartes de caractéristiques (feature maps)
 - Identifier les hyperparamètres essentiels du CNN
 
-Durée : 2h–2h30  
-Environnement : **Google Colab** (aucune installation nécessaire)
+Environnement : **Google Colab** (Comme pour les séances précédentes : Aucune installation nécessaire)
 
 ---
 
