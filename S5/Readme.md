@@ -5,23 +5,39 @@
 - Comprendre et comparer plusieurs méthodes de régularisation : Dropout, L2, BatchNorm, Data Augmentation, EarlyStopping.
 - Observer leurs effets sur les performances et les courbes d’apprentissage.
 
-Environnement : Google Colab (TensorFlow / Keras)
+Environnement : Google Colab (TensorFlow / Keras) 
+
+**Remarque : Sans GPU activité, les temps seront très longs !**
 
 ---
 
 ## Étape 0 – Chargement et exploration du dataset
 
 ```python
+import tensorflow as tf
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.utils import to_categorical
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout, BatchNormalization
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.callbacks import EarlyStopping
+from tensorflow.keras.regularizers import l2
+import numpy as np
 import matplotlib.pyplot as plt
 
+print("TensorFlow:", tf.__version__)
+print("GPU:", tf.config.list_physical_devices('GPU'))
+
+# Chargement
 (X_train, y_train), (X_test, y_test) = cifar10.load_data()
 
-print("Taille :", X_train.shape, X_test.shape)
+# Normalisation
+X_train = X_train.astype("float32")/255.0
+X_test  = X_test.astype("float32")/255.0
 
-# TODO : normaliser les pixels entre 0 et 1
-# TODO : encoder les labels (one‑hot)
+# One-hot
+y_train_cat = to_categorical(y_train, 10)
+y_test_cat  = to_categorical(y_test, 10)
 ```
 
 **Q0.1.** Quelle est la taille et la structure des images ?  
@@ -69,7 +85,7 @@ history_base = base.fit(
 ```
 
 **Q1.** Quelle précision obtiens‑tu sur le train et sur le test ?  
-**Q2.** Observe les courbes d’accuracy : y a‑t‑il un overfitting ?  
+**Q2.** Observe les courbes d’accuracy : y a‑t‑il un overfitting ? Si oui, à quel moment se produit-il ?  
 
 ```python
 plt.plot(history_base.history['accuracy'],label='train')
@@ -105,7 +121,7 @@ history_drop = drop.fit(
 )
 ```
 
-**Q3.** Compare les courbes train/val : l’écart diminue‑t‑il ?  
+**Q3.** Qe signiie le Dropout ? Compare les courbes train/val : l’écart diminue‑t‑il ?  
 **Q4.** Que se passe‑t‑il si le taux de Dropout est trop élevé ?  
 
 📚 *Aide : [Dropout – Keras](https://keras.io/api/layers/regularization_layers/dropout/)*
@@ -135,7 +151,7 @@ history_l2 = l2_model.fit(
 )
 ```
 
-**Q5.** L’écart train/test diminue‑t‑il ?  
+**Q5.** Qu'est ce que la régularisation L2 ? Quel impact : L’écart train/test diminue‑t‑il ?  
 **Q6.** Quel effet aurait une régularisation trop forte ?  
 
 📚 *Aide : [Regularizers – Keras](https://keras.io/api/layers/regularizers/)*
@@ -167,7 +183,7 @@ history_bn = bn.fit(
 )
 ```
 
-**Q7.** La convergence est‑elle plus rapide ou plus stable ?  
+**Q7.** Qu'est ce que la Batch Normalization ? La convergence est‑elle plus rapide ou plus stable ?  
 **Q8.** Pourquoi cette normalisation aide‑t‑elle ?  
 
 📚 *Aide : [BatchNormalization – Keras](https://keras.io/api/layers/normalization_layers/batch_normalization/)*
@@ -198,14 +214,14 @@ history_aug = aug.fit(
 )
 ```
 
-**Q9.** Pourquoi cette méthode réduit‑elle l’overfitting ?  
-**Q10.** Quelles transformations semblent les plus efficaces ?  
+**Q9.** Qu'est ce que la Data Augmentation ? Pourquoi cette méthode réduit‑elle l’overfitting ?  
+**Q10.** Quelles transformations semblent les plus efficaces ?  **Si c'est trop long, réduisez éventuellement le nombre d'Epochs**
 
 📚 *Aide : [ImageDataGenerator – Keras](https://keras.io/api/preprocessing/image/)*
 
 ---
 
-## Étape 6 – Early Stopping et synthèse
+## Étape 6 – Early Stopping
 
 ```python
 from tensorflow.keras.callbacks import EarlyStopping
@@ -222,7 +238,7 @@ history_es = es.fit(
 ```
 
 **Q11.** Combien d’époques sont réellement effectuées ?  
-**Q12.** Quel intérêt par rapport à un nombre fixe d’époques ?  
+**Q12.** Qu'est ce que l'Early Stopping ? Quel intérêt par rapport à un nombre fixe d’époques ?  
 
 📚 *Aide : [EarlyStopping – Keras](https://keras.io/api/callbacks/early_stopping/)*
 
