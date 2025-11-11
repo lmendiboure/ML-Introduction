@@ -116,3 +116,47 @@ for episode in range(20):
 
 print(Q)
 ```
+
+### Questions d’analyse
+
+- **Q11.** Que représente chaque cellule du tableau `Q` ?
+- **Q12.** Pourquoi certaines valeurs deviennent-elles positives et d’autres négatives ?
+- **Q13.** Quelle action semble la plus intéressante dans l’état 0 ?
+- **Q14.** Que se passe-t-il si l’on modifie la récompense finale (par ex. `+10 → +1`) ?
+- **Q15.** Pourquoi le paramètre γ (*gamma*) est-il important pour valoriser les récompenses futures ?
+
+---
+
+## 5. Exemples d’applications concrètes du Reinforcement Learning
+
+| **Domaine**   | **Exemple concret**            | **Objectif de l’agent**                          |
+|---------------|--------------------------------|--------------------------------------------------|
+| Jeux vidéo    | AlphaGo, Atari, Dota 2         | Maximiser la probabilité de victoire             |
+| Robotique     | Bras robotisé, drones          | Réaliser une tâche motrice précise               |
+| Transport     | Feux de circulation intelligents| Fluidifier le trafic et réduire l’attente        |
+| Énergie       | Régulation chauffage / réseau  | Optimiser la consommation énergétique            |
+| Santé         | Traitement personnalisé        | Adapter la thérapie au profil du patient         |
+
+### Questions de réflexion
+
+- **Q16.** Quels points communs retrouve-t-on entre ces différentes applications ?
+- **Q17.** Dans quels domaines le RL pourrait-il encore être sous-exploité ?
+- **Q18.** Donnez un exemple où le RL ne serait pas appropri, et justifiez votre réponse.
+- **Q19.** Quelles sont, selon vous, les principales limites techniques et éthiques du RL ?
+
+---
+
+## 6. Synthèse finale
+
+Le Reinforcement Learning repose sur quatre éléments fondamentaux :
+
+1. **L’agent**, qui agit.  
+2. **L’environnement**, qui réagit.  
+3. **La récompense**, qui guide l’apprentissage.  
+4. **La politique**, qui s’améliore au fil du temps.
+
+### Questions de conclusion
+
+- **Q20.** Résumez le fonctionnement général du RL en une phrase.
+- **Q21.** Quelle est, selon vous, la principale force de cette approche ?
+- **Q22.** Quelle difficulté majeure un ingénieur doit-il anticiper lorsqu’il conçoit un agent apprenant ?
