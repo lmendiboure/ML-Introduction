@@ -46,8 +46,6 @@ Ce principe s’applique aussi à des contextes humains : un individu ajuste son
         + nouvel état s'
 ```
 
-## 2. Le schéma général du Reinforcement Learning
-
 Chaque interaction suit le même cycle :
 
 1. L’agent observe un état de l’environnement.  
@@ -141,22 +139,8 @@ print(Q)
 
 - **Q16.** Quels points communs retrouve-t-on entre ces différentes applications ?
 - **Q17.** Dans quels domaines le RL pourrait-il encore être sous-exploité ?
-- **Q18.** Donnez un exemple où le RL ne serait pas appropri, et justifiez votre réponse.
-- **Q19.** Quelles sont, selon vous, les principales limites techniques et éthiques du RL ?
+- **Q18.** Donnez un exemple où le RL ne serait pas adapté, et justifiez votre réponse.
+- **Q19.** Quelles sont, selon vous, les principales limites techniques (voire éthiques si vous avez des idées) du RL ? Quelles difficultés dans sa mise en oeuvre ?
 
 ---
 
-## 6. Synthèse finale
-
-Le Reinforcement Learning repose sur quatre éléments fondamentaux :
-
-1. **L’agent**, qui agit.  
-2. **L’environnement**, qui réagit.  
-3. **La récompense**, qui guide l’apprentissage.  
-4. **La politique**, qui s’améliore au fil du temps.
-
-### Questions de conclusion
-
-- **Q20.** Résumez le fonctionnement général du RL en une phrase.
-- **Q21.** Quelle est, selon vous, la principale force de cette approche ?
-- **Q22.** Quelle difficulté majeure un ingénieur doit-il anticiper lorsqu’il conçoit un agent apprenant ?
