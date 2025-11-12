@@ -18,10 +18,10 @@ Au fil du temps, il apprend quelles séquences d’actions mènent à la réussi
 Ce principe s’applique aussi à des contextes humains : un individu ajuste son comportement selon les conséquences de ses décisions.
 
 ### Questions de réflexion
-- Q1. Quelles différences fondamentales distinguent cet apprentissage par essai-erreur d’un apprentissage supervisé classique ?  
-- Q2. Pourquoi la notion de retour d’expérience (reward/penalty) est-elle essentielle dans ce type d’apprentissage ?  
-- Q3. Citez deux exemples réels où un agent, humain ou machine, apprend de manière similaire à ce principe.  
-- Q4. Quels sont les avantages et les limites de ce mode d’apprentissage ?  
+- **Q1.** Quelles différences fondamentales distinguent cet apprentissage par essai-erreur d’un apprentissage supervisé classique ?  
+- **Q2.** Pourquoi la notion de retour d’expérience (reward/penalty) est-elle essentielle dans ce type d’apprentissage ?  
+- **Q3.** Citez deux exemples réels où un agent, humain ou machine, apprend de manière similaire à ce principe.  
+- **Q4.** Quels sont les avantages et les limites de ce mode d’apprentissage ?  
 
 ---
 
