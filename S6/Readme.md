@@ -174,6 +174,8 @@ L’agent reçoit :
 - -1 par action pour encourager les stratégies efficaces,
 - -10 en cas de dépôt incorrect.
 
+### Questions 
+
 - **Q1.** Décrivez la structure générale de cet environnement.
 
 - **Q2.** Combien d’états distincts peuvent exister ? Pourquoi ce nombre est-il élevé ?
@@ -223,6 +225,8 @@ for episode in range(1000):
     epsilon = max(eps_min, epsilon * eps_decay)
     rewards.append(total_reward)
 ```
+### Questions 
+
 - **Q5.** Que représente la Q-table dans cet algorithme ?
 
 - **Q6.** Quel rôle jouent les paramètres alpha, gamma et epsilon ?
@@ -254,6 +258,7 @@ while not done and steps < 50:
     done = terminated or truncated
     steps += 1
 ```
+### Questions 
 
 - **Q9.** Comment évoluent les récompenses moyennes au fil du temps ?
 
@@ -281,6 +286,7 @@ for (alpha, gamma, epsilon) in configs:
             Q[s,a] += alpha * (r + gamma * np.max(Q[s2]) - Q[s,a])
             s = s2
 ```
+### Questions 
 
 - **Q12.** Quels paramètres accélèrent la convergence ?
 
@@ -315,6 +321,8 @@ for ep in range(300):
 
 - **Q17.** Qu’est-ce que le reward shaping et quels en sont les risques ?
 
+---
+
 ## Partie 3 - Sujet bonus – FrozenLake-v1 et CartPole-v1
 
 Explorer un environnement différent pour observer les limites du Q-learning :
@@ -328,6 +336,7 @@ env = gym.make("FrozenLake-v1", is_slippery=True)
 obs, info = env.reset()
 env.render()
 ```
+### Questions 
 
 - **Q1.** Quelle différence majeure observe-t-on avec Taxi-v3 ?
 
@@ -360,6 +369,8 @@ model = keras.Sequential([
 model.compile(optimizer=keras.optimizers.Adam(learning_rate=0.001),
               loss='mse')
 ```
+### Questions 
+
 - **Q4.** Pourquoi un réseau de neurones est-il nécessaire ici ?
 
 - **Q5.** Quelle différence fondamentale avec le Q-learning tabulaire ?
